@@ -26,7 +26,7 @@ public class AppConfiguration {
     @Bean
     public ActorSystem actorSystem() {
         ActorSystem system = ActorSystem.create("AkkaJavaSpringDI");
-        // initialize the application context in the Akka Spring Extension so that
+        // initialize the application context in the Akka Spring Extension.
         SpringExtProvider.get(system).initialize(applicationContext);
         return system;
     }
