@@ -5,6 +5,7 @@ import akka.util.Timeout;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import scala.concurrent.Await;
@@ -24,6 +25,7 @@ public class TestDI {
      * Note Actor Ref is directly injected.
      */
     @Autowired
+    @Qualifier("counter")
     private ActorRef counter;
 
     @Test
