@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class CountingActor extends UntypedActor {
 
+    public static final String COUNTING_ACTOR_NAME = "countingActor";
+
     private final CountingService countingService;
 
     public static class Count {

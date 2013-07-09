@@ -25,19 +25,19 @@ public class TestDI {
      * Note Actor Ref is directly injected.
      */
     @Autowired
-    @Qualifier("counter")
-    private ActorRef counter;
+    @Qualifier(AppConfiguration.MASTER_ACTOR_REF)
+    private ActorRef masterActor;
 
     @Test
     public void testDependencyInjection() throws Exception {
         // tell it to count three times
-        counter.tell(new CountingActor.Count(), null);
-        counter.tell(new CountingActor.Count(), null);
-        counter.tell(new CountingActor.Count(), null);
+        masterActor.tell(new CountingActor.Count(), null);
+        masterActor.tell(new CountingActor.Count(), null);
+        masterActor.tell(new CountingActor.Count(), null);
 
         // check that it has counted correctly
         FiniteDuration duration = FiniteDuration.create(3, TimeUnit.SECONDS);
-        Future<Object> result = ask(counter, new CountingActor.Get(),
+        Future<Object> result = ask(masterActor, new CountingActor.Get(),
                 Timeout.durationToTimeout(duration));
         assertEquals(3, Await.result(result, duration));
 

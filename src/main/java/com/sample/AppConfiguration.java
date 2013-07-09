@@ -17,6 +17,8 @@ public class AppConfiguration {
 
     private static final String ACTOR_SYSTEM = "AkkaJavaSpringDI";
 
+    public static final String MASTER_ACTOR_REF = "masterActorRef";
+
     private ActorSystem actorSystem;
 
     /**
@@ -38,19 +40,13 @@ public class AppConfiguration {
     }
 
     /**
-     * Following bean definition will expose the actor ref as spring bean as well, so we can inject actor ref in spring bean as well.
-     * <p/>
-     * In this example
-     * <p/>
-     * counter is the bean name of actorRef
-     * countingActor is the bean name of Actor
-     * beanCounter is the actor name in akka world.
+     * This actor is created so that actor system gets initialized with all the actors.
      *
      * @return
      */
-    @Bean(name = "counter")
-    @DependsOn({ACTOR_SYSTEM})
-    public ActorRef countingActor() {
-        return actorSystem.actorOf(SpringExtProvider.get(actorSystem).props("countingActor"), "beanCounter");
+    @Bean(name = MASTER_ACTOR_REF)
+    @DependsOn(ACTOR_SYSTEM)
+    public ActorRef masterActor() {
+        return actorSystem.actorOf(SpringExtProvider.get(actorSystem).props(MasterActor.MASTER_ACTOR_NAME), MasterActor.MASTER_ACTOR_NAME);
     }
 }
