@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AppConfiguration.class)
-public class TestBeanDI {
+public class TestDI {
 
     /**
      * Note Actor Ref is directly injected.
