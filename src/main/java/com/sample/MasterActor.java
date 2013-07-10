@@ -18,13 +18,8 @@ public class MasterActor extends UntypedActor {
 
     public static final String MASTER_ACTOR_NAME = "masterActor";
 
-    private final ActorRef countingActor;
-
-    @Autowired
-    public MasterActor(ActorSystem actorSystem) {
-        countingActor = getContext().actorOf(SpringExtProvider.get(actorSystem).props(CountingActor.COUNTING_ACTOR_NAME),
-                CountingActor.COUNTING_ACTOR_NAME);
-    }
+    private final ActorRef countingActor = getContext().actorOf(SpringExtProvider.get(getContext().system()).props(
+            CountingActor.COUNTING_ACTOR_NAME), CountingActor.COUNTING_ACTOR_NAME);
 
 
     @Override
